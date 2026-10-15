@@ -1,0 +1,8 @@
+vendor/
+server/doom.wasm
+server/wad/
+node_modules/
+infra/cdk.out/
+*.png
+!docs/*.png
+.DS_Store

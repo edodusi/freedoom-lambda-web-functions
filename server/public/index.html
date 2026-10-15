@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freedoom on AWS Lambda Web Functions</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #111; color: #ddd; font: 14px/1.4 system-ui, sans-serif; }
+    main { display: grid; gap: 12px; justify-items: center; }
+    canvas { width: min(96vw, 960px); aspect-ratio: 320 / 240; image-rendering: pixelated; background: #000; outline: none; }
+    canvas:focus { box-shadow: 0 0 0 2px #e43; }
+    #status { font-variant-numeric: tabular-nums; color: #aaa; min-height: 1.4em; text-align: center; }
+    #share a { color: #e96; word-break: break-all; }
+    #latency { font-variant-numeric: tabular-nums; color: #888; font-size: 13px; }
+    button { font: inherit; background: #333; color: #ddd; border: 1px solid #555; border-radius: 4px; padding: 2px 10px; cursor: pointer; }
+    dialog { background: #1b1b1b; color: #ddd; border: 1px solid #444; border-radius: 8px; text-align: center; }
+    dialog::backdrop { background: rgb(0 0 0 / 0.7); }
+    dialog h2 { margin: 0 0 12px; font-size: 18px; }
+    /* QR codes need dark modules on a light background to scan reliably. */
+    #qrCode { background: #fff; padding: 12px; border-radius: 6px; line-height: 0; }
+    #qrCode svg { width: min(70vw, 320px); height: auto; }
+    #qrLink { max-width: 340px; word-break: break-all; color: #aaa; font-size: 12px; }
+    .spectator #controls { display: none; }
+    kbd { border: 1px solid #555; border-radius: 3px; padding: 0 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- Doom renders 320x200 but was drawn for 4:3 displays, so the canvas is stretched to 320x240. -->
+    <canvas id="screen" width="320" height="200" tabindex="0" aria-label="Freedoom game screen. Click to focus, then use the keyboard."></canvas>
+    <div id="status">Connecting…</div>
+    <div id="controls">
+      Click the screen, then: <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move,
+      <kbd>Ctrl</kbd> fire, <kbd>Space</kbd>/<kbd>E</kbd> use, <kbd>Shift</kbd> run, <kbd>1</kbd>–<kbd>7</kbd> weapons, <kbd>Esc</kbd> menu.
+    </div>
+    <div id="share" hidden>Let others watch (no controls): <a href="#"></a> <button type="button" id="qrButton">Show QR code</button></div>
+    <div id="latency" aria-live="off">Measuring latency…</div>
+  </main>
+  <dialog id="qrDialog" aria-labelledby="qrTitle">
+    <h2 id="qrTitle">Scan to watch this game</h2>
+    <div id="qrCode"></div>
+    <p id="qrLink"></p>
+    <form method="dialog"><button>Close</button></form>
+  </dialog>
+  <script type="module" src="/client.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "freedoom-lambda-web-functions-server",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "license": "GPL-2.0-only",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1152.0"
+  }
+}
