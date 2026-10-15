@@ -1,6 +1,6 @@
 # Freedoom on AWS Lambda Web Functions
 
-The 1993 Doom game engine, compiled to WebAssembly, running inside an AWS Lambda Web Function! This is the real test of any computing form factor, can you run the Doom engine on it!
+The 1993 Doom game engine, compiled to WebAssembly, running inside an AWS Lambda Web Function! It's the classic test for any new compute platform: can it run Doom?
 
 ![A frame from the first Freedoom level, rendered by the engine](docs/screenshot.png)
 
